@@ -20,7 +20,8 @@ internal class MaterialHelper
             AddSlot("Import Indicator").
             SpawnEntity<ProgressBarInterface, LegacySegmentCircleProgress>
                 (FavoriteEntity.ProgressBar);
-        pbi.Slot.PositionInFrontOfUser();
+        pbi.Slot.SetParent(slot, false);
+        pbi.Slot.LocalPosition += new float3(0, -0.15f, 0);
         pbi.Initialize(canBeHidden: true);
         pbi.UpdateProgress(0.0f, "Got Metallic Material! Starting conversion...", string.Empty);
 
@@ -87,7 +88,8 @@ internal class MaterialHelper
             AddSlot("Import Indicator").
             SpawnEntity<ProgressBarInterface, LegacySegmentCircleProgress>
                 (FavoriteEntity.ProgressBar);
-        pbi.Slot.PositionInFrontOfUser();
+        pbi.Slot.SetParent(slot, false);
+        pbi.Slot.LocalPosition += new float3(0, -0.15f, 0);
         pbi.Initialize(canBeHidden: true);
         pbi.UpdateProgress(0.0f, "Got Specular Material! Starting conversion...", string.Empty);
 

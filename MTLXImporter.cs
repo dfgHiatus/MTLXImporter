@@ -88,6 +88,8 @@ public partial class MTLXImporter : ResoniteMod
 
     private static async Task ProcessMTLXImport(List<string> files)
     {
+        // This could be made parallel in theory, but it overwhelms background jobs in an instant
+        // So, the best thing we can do process one material at a time
         for (int i = 0; i < files.Count; i++)
         {
             await default(ToBackground);
@@ -99,7 +101,7 @@ public partial class MTLXImporter : ResoniteMod
             await default(ToWorld);
             var slot = Engine.Current.WorldManager.FocusedWorld.AddSlot(name);
             slot.PositionInFrontOfUser();
-            slot.GlobalPosition += new float3(i * .2f, 0f, 0f);
+            slot.GlobalPosition += new float3(i * 0.2f, 0f, 0f);
 
             await default(ToBackground);
             var assetDict = await GetTextureURLs(file, matX, slot);

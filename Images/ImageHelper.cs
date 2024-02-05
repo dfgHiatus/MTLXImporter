@@ -16,6 +16,7 @@ internal static class ImageHelper
         if (!File.Exists(candidateFile))
         {
             // Careful - Directory.GetFiles/EnumerateFiles causes issues in async mode. Just skip this :>
+
             //var texture = Directory.
             //    EnumerateFiles(candidateFile).
             //    First(f => f.ToLower().Contains(file.ToLower()) && f.EndsWith(PNG_EXTENSION)); 

@@ -1,17 +1,17 @@
 ﻿namespace MTLXImporter;
 
-internal class DataTransferObject<T, U>
+public class DataTransferObject<T, U>
 {
-    internal T key;
-    internal U value;
+    public T key;
+    public U value;
 
-    internal DataTransferObject()
+    public DataTransferObject()
     {
         key = default;
         value = default;
     }
 
-    internal DataTransferObject(T key, U value)
+    public DataTransferObject(T key, U value)
     {
         this.key = key;
         this.value = value;

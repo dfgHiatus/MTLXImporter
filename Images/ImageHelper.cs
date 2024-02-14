@@ -15,16 +15,6 @@ internal static class ImageHelper
         var candidateFile = Path.Combine(path, file);
         if (!File.Exists(candidateFile))
         {
-            // Careful - Directory.GetFiles/EnumerateFiles causes issues in async mode. Just skip this :>
-
-            //var texture = Directory.
-            //    EnumerateFiles(candidateFile).
-            //    First(f => f.ToLower().Contains(file.ToLower()) && f.EndsWith(PNG_EXTENSION)); 
-            //if (string.IsNullOrEmpty(texture))
-            //    return null;
-            //else
-            //    candidateFile = Path.Combine(path, texture);
-
             return null;
         }
 
@@ -58,6 +48,8 @@ internal static class ImageHelper
             dto.key = TextureType.Height;
         else if (loweredName.Contains("ambientocclusion") || loweredName.Contains("occlusion"))
             dto.key = TextureType.AmbientOcclusion;
+        else if (loweredName.Contains("metal"))
+            dto.key = TextureType.Gloss;
         else
             dto.key = TextureType.UNKNOWN;
 

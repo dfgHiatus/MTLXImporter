@@ -15,7 +15,7 @@ public partial class MTLXImporter : ResoniteMod
 {
     public override string Name => "MTLXImporter";
     public override string Author => "dfgHiatus";
-    public override string Version => "1.0.0";
+    public override string Version => "1.1.0";
     public override string Link => "https://github.com/dfgHiatus/MTLXImporter/";
 
     [AutoRegisterConfigKey]
@@ -23,12 +23,24 @@ public partial class MTLXImporter : ResoniteMod
         new("enabled", "Enabled", () => true);
 
     [AutoRegisterConfigKey]
+    public static readonly ModConfigurationKey<bool> Resize =
+        new("resize", "Should images be resized on import?", () => true);
+
+    [AutoRegisterConfigKey]
+    public static readonly ModConfigurationKey<int> MaxTextureSize =
+    new("maxSize", "Max texture size", () => 2048);
+
+    [AutoRegisterConfigKey]
+    public static readonly ModConfigurationKey<bool> ApplyMetallic =
+        new("applyMetallic", "Apply metallic/specular textures?", () => true);
+
+    [AutoRegisterConfigKey]
     public static readonly ModConfigurationKey<bool> ConvertRoughnessToMetallic =
-        new("convertRoughnessToMetallic", "Convert roughness to metallic (alpha from intensity)", () => true);
+        new("convertRoughnessToMetallic", "Convert roughness to metallic (alpha from intensity)?", () => true);
 
     [AutoRegisterConfigKey]
     public static readonly ModConfigurationKey<bool> ConvertSpecular =
-        new("convertSpecular", "Convert specular (alpha from intensity)", () => true);
+        new("convertSpecular", "Convert specular (alpha from intensity)?", () => true);
 
     internal static ModConfiguration Config;
     internal static readonly HashSet<string> MTLX_FILE_EXTENSIONS = new() { ".mtlx" };
@@ -37,7 +49,7 @@ public partial class MTLXImporter : ResoniteMod
     {
         new Harmony("net.dfgHiatus.MTLXImporter").PatchAll();
         Config = GetConfiguration();
-        Engine.Current.RunPostInit(() => AssetPatch());
+        Engine.Current.RunPostInit(AssetPatch);
     }
 
     private static void AssetPatch()
